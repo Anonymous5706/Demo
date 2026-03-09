@@ -491,94 +491,226 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <h2>Featured samples</h2>
+            <h2>Samples</h2>
             <p class="section-intro">
-              Below are example layouts for the two main settings emphasized in the paper: time-varying emotion control and cross-lingual emotion transfer.
+              The layout below follows a horizontal comparison style. Each emotion setting contains two rows to represent two tracks, which can be used for male and female examples.
             </p>
           </div>
         </div>
 
         <div class="sample-group">
           <h3>Time-varying emotion control</h3>
-          <p class="small">Each case includes <span class="code">audio prompt</span>, <span class="code">F5-TTS (finetuned)</span>, <span class="code">EO-LoRA</span>, and <span class="code">EO-LoRA + Flow-DGPO</span>.</p>
-          <div class="sample-grid">
-            <article class="sample-card">
-              <div class="content">
-                <div class="tag">Angry → Calm</div>
-                <div class="audio-stack">
-                  <div class="audio-item"><label>Audio prompt</label><audio controls src="assets/audio/timevarying/angry_calm_prompt.wav"></audio></div>
-                  <div class="audio-item"><label>F5-TTS (finetuned)</label><audio controls src="assets/audio/timevarying/angry_calm_f5.wav"></audio></div>
-                  <div class="audio-item"><label>EO-LoRA</label><audio controls src="assets/audio/timevarying/angry_calm_eolora.wav"></audio></div>
-                  <div class="audio-item"><label>EO-LoRA + Flow-DGPO</label><audio controls src="assets/audio/timevarying/angry_calm_full.wav"></audio></div>
-                </div>
-              </div>
-            </article>
+          <p class="small">Each setting includes <span class="code">Audio prompt</span>, <span class="code">F5-TTS (finetuned)</span>, <span class="code">EO-LoRA</span>, and <span class="code">EO-LoRA + Flow-DGPO</span>.</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 150px;">Transition</th>
+                  <th style="width: 110px;">Track</th>
+                  <th>Audio prompt</th>
+                  <th>F5-TTS (finetuned)</th>
+                  <th>EO-LoRA</th>
+                  <th>EO-LoRA + Flow-DGPO</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td rowspan="2"><strong>Angry → Calm</strong></td>
+                  <td>Male</td>
+                  <td><audio controls src="assets/audio/timevarying/angry_calm_m_prompt.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/angry_calm_m_f5.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/angry_calm_m_eolora.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/angry_calm_m_full.wav"></audio></td>
+                </tr>
+                <tr>
+                  <td>Female</td>
+                  <td><audio controls src="assets/audio/timevarying/angry_calm_f_prompt.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/angry_calm_f_f5.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/angry_calm_f_eolora.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/angry_calm_f_full.wav"></audio></td>
+                </tr>
 
-            <article class="sample-card">
-              <div class="content">
-                <div class="tag">Sad → Surprised</div>
-                <div class="audio-stack">
-                  <div class="audio-item"><label>Audio prompt</label><audio controls src="assets/audio/timevarying/sad_surprised_prompt.wav"></audio></div>
-                  <div class="audio-item"><label>F5-TTS (finetuned)</label><audio controls src="assets/audio/timevarying/sad_surprised_f5.wav"></audio></div>
-                  <div class="audio-item"><label>EO-LoRA</label><audio controls src="assets/audio/timevarying/sad_surprised_eolora.wav"></audio></div>
-                  <div class="audio-item"><label>EO-LoRA + Flow-DGPO</label><audio controls src="assets/audio/timevarying/sad_surprised_full.wav"></audio></div>
-                </div>
-              </div>
-            </article>
+                <tr>
+                  <td rowspan="2"><strong>Sad → Surprised</strong></td>
+                  <td>Male</td>
+                  <td><audio controls src="assets/audio/timevarying/sad_surprised_m_prompt.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/sad_surprised_m_f5.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/sad_surprised_m_eolora.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/sad_surprised_m_full.wav"></audio></td>
+                </tr>
+                <tr>
+                  <td>Female</td>
+                  <td><audio controls src="assets/audio/timevarying/sad_surprised_f_prompt.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/sad_surprised_f_f5.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/sad_surprised_f_eolora.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/sad_surprised_f_full.wav"></audio></td>
+                </tr>
 
-            <article class="sample-card">
-              <div class="content">
-                <div class="tag">Happy → Disgusted</div>
-                <div class="audio-stack">
-                  <div class="audio-item"><label>Audio prompt</label><audio controls src="assets/audio/timevarying/happy_disgusted_prompt.wav"></audio></div>
-                  <div class="audio-item"><label>F5-TTS (finetuned)</label><audio controls src="assets/audio/timevarying/happy_disgusted_f5.wav"></audio></div>
-                  <div class="audio-item"><label>EO-LoRA</label><audio controls src="assets/audio/timevarying/happy_disgusted_eolora.wav"></audio></div>
-                  <div class="audio-item"><label>EO-LoRA + Flow-DGPO</label><audio controls src="assets/audio/timevarying/happy_disgusted_full.wav"></audio></div>
-                </div>
-              </div>
-            </article>
+                <tr>
+                  <td rowspan="2"><strong>Happy → Disgusted</strong></td>
+                  <td>Male</td>
+                  <td><audio controls src="assets/audio/timevarying/happy_disgusted_m_prompt.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/happy_disgusted_m_f5.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/happy_disgusted_m_eolora.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/happy_disgusted_m_full.wav"></audio></td>
+                </tr>
+                <tr>
+                  <td>Female</td>
+                  <td><audio controls src="assets/audio/timevarying/happy_disgusted_f_prompt.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/happy_disgusted_f_f5.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/happy_disgusted_f_eolora.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/happy_disgusted_f_full.wav"></audio></td>
+                </tr>
 
-            <article class="sample-card">
-              <div class="content">
-                <div class="tag">Calm → Fearful</div>
-                <div class="audio-stack">
-                  <div class="audio-item"><label>Audio prompt</label><audio controls src="assets/audio/timevarying/calm_fearful_prompt.wav"></audio></div>
-                  <div class="audio-item"><label>F5-TTS (finetuned)</label><audio controls src="assets/audio/timevarying/calm_fearful_f5.wav"></audio></div>
-                  <div class="audio-item"><label>EO-LoRA</label><audio controls src="assets/audio/timevarying/calm_fearful_eolora.wav"></audio></div>
-                  <div class="audio-item"><label>EO-LoRA + Flow-DGPO</label><audio controls src="assets/audio/timevarying/calm_fearful_full.wav"></audio></div>
-                </div>
-              </div>
-            </article>
+                <tr>
+                  <td rowspan="2"><strong>Calm → Fearful</strong></td>
+                  <td>Male</td>
+                  <td><audio controls src="assets/audio/timevarying/calm_fearful_m_prompt.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/calm_fearful_m_f5.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/calm_fearful_m_eolora.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/calm_fearful_m_full.wav"></audio></td>
+                </tr>
+                <tr>
+                  <td>Female</td>
+                  <td><audio controls src="assets/audio/timevarying/calm_fearful_f_prompt.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/calm_fearful_f_f5.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/calm_fearful_f_eolora.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/calm_fearful_f_full.wav"></audio></td>
+                </tr>
 
-            <article class="sample-card">
-              <div class="content">
-                <div class="tag">Sad → Happy</div>
-                <div class="audio-stack">
-                  <div class="audio-item"><label>Audio prompt</label><audio controls src="assets/audio/timevarying/sad_happy_prompt.wav"></audio></div>
-                  <div class="audio-item"><label>F5-TTS (finetuned)</label><audio controls src="assets/audio/timevarying/sad_happy_f5.wav"></audio></div>
-                  <div class="audio-item"><label>EO-LoRA</label><audio controls src="assets/audio/timevarying/sad_happy_eolora.wav"></audio></div>
-                  <div class="audio-item"><label>EO-LoRA + Flow-DGPO</label><audio controls src="assets/audio/timevarying/sad_happy_full.wav"></audio></div>
-                </div>
-              </div>
-            </article>
+                <tr>
+                  <td rowspan="2"><strong>Sad → Happy</strong></td>
+                  <td>Male</td>
+                  <td><audio controls src="assets/audio/timevarying/sad_happy_m_prompt.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/sad_happy_m_f5.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/sad_happy_m_eolora.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/sad_happy_m_full.wav"></audio></td>
+                </tr>
+                <tr>
+                  <td>Female</td>
+                  <td><audio controls src="assets/audio/timevarying/sad_happy_f_prompt.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/sad_happy_f_f5.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/sad_happy_f_eolora.wav"></audio></td>
+                  <td><audio controls src="assets/audio/timevarying/sad_happy_f_full.wav"></audio></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
         <div class="sample-group" style="margin-top: 30px;">
           <h3>JVNV samples</h3>
-          <p class="small">Emotion categories: <span class="code">happy</span>, <span class="code">sad</span>, <span class="code">angry</span>, <span class="code">surprised</span>, <span class="code">disgusted</span>, and <span class="code">fearful</span>. Each case includes the same four systems.</p>
-          <div class="sample-grid">
-            <article class="sample-card"><div class="content"><div class="tag">Happy</div><div class="audio-stack"><div class="audio-item"><label>Audio prompt</label><audio controls src="assets/audio/jvnv/happy_prompt.wav"></audio></div><div class="audio-item"><label>F5-TTS (finetuned)</label><audio controls src="assets/audio/jvnv/happy_f5.wav"></audio></div><div class="audio-item"><label>EO-LoRA</label><audio controls src="assets/audio/jvnv/happy_eolora.wav"></audio></div><div class="audio-item"><label>EO-LoRA + Flow-DGPO</label><audio controls src="assets/audio/jvnv/happy_full.wav"></audio></div></div></div></article>
+          <p class="small">Each emotion category contains two rows for male and female tracks, with the same four systems.</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 150px;">Emotion</th>
+                  <th style="width: 110px;">Track</th>
+                  <th>Audio prompt</th>
+                  <th>F5-TTS (finetuned)</th>
+                  <th>EO-LoRA</th>
+                  <th>EO-LoRA + Flow-DGPO</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td rowspan="2"><strong>Happy</strong></td>
+                  <td>Male</td>
+                  <td><audio controls src="assets/audio/jvnv/happy_m_prompt.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/happy_m_f5.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/happy_m_eolora.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/happy_m_full.wav"></audio></td>
+                </tr>
+                <tr>
+                  <td>Female</td>
+                  <td><audio controls src="assets/audio/jvnv/happy_f_prompt.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/happy_f_f5.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/happy_f_eolora.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/happy_f_full.wav"></audio></td>
+                </tr>
 
-            <article class="sample-card"><div class="content"><div class="tag">Sad</div><div class="audio-stack"><div class="audio-item"><label>Audio prompt</label><audio controls src="assets/audio/jvnv/sad_prompt.wav"></audio></div><div class="audio-item"><label>F5-TTS (finetuned)</label><audio controls src="assets/audio/jvnv/sad_f5.wav"></audio></div><div class="audio-item"><label>EO-LoRA</label><audio controls src="assets/audio/jvnv/sad_eolora.wav"></audio></div><div class="audio-item"><label>EO-LoRA + Flow-DGPO</label><audio controls src="assets/audio/jvnv/sad_full.wav"></audio></div></div></div></article>
+                <tr>
+                  <td rowspan="2"><strong>Sad</strong></td>
+                  <td>Male</td>
+                  <td><audio controls src="assets/audio/jvnv/sad_m_prompt.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/sad_m_f5.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/sad_m_eolora.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/sad_m_full.wav"></audio></td>
+                </tr>
+                <tr>
+                  <td>Female</td>
+                  <td><audio controls src="assets/audio/jvnv/sad_f_prompt.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/sad_f_f5.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/sad_f_eolora.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/sad_f_full.wav"></audio></td>
+                </tr>
 
-            <article class="sample-card"><div class="content"><div class="tag">Angry</div><div class="audio-stack"><div class="audio-item"><label>Audio prompt</label><audio controls src="assets/audio/jvnv/angry_prompt.wav"></audio></div><div class="audio-item"><label>F5-TTS (finetuned)</label><audio controls src="assets/audio/jvnv/angry_f5.wav"></audio></div><div class="audio-item"><label>EO-LoRA</label><audio controls src="assets/audio/jvnv/angry_eolora.wav"></audio></div><div class="audio-item"><label>EO-LoRA + Flow-DGPO</label><audio controls src="assets/audio/jvnv/angry_full.wav"></audio></div></div></div></article>
+                <tr>
+                  <td rowspan="2"><strong>Angry</strong></td>
+                  <td>Male</td>
+                  <td><audio controls src="assets/audio/jvnv/angry_m_prompt.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/angry_m_f5.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/angry_m_eolora.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/angry_m_full.wav"></audio></td>
+                </tr>
+                <tr>
+                  <td>Female</td>
+                  <td><audio controls src="assets/audio/jvnv/angry_f_prompt.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/angry_f_f5.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/angry_f_eolora.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/angry_f_full.wav"></audio></td>
+                </tr>
 
-            <article class="sample-card"><div class="content"><div class="tag">Surprised</div><div class="audio-stack"><div class="audio-item"><label>Audio prompt</label><audio controls src="assets/audio/jvnv/surprised_prompt.wav"></audio></div><div class="audio-item"><label>F5-TTS (finetuned)</label><audio controls src="assets/audio/jvnv/surprised_f5.wav"></audio></div><div class="audio-item"><label>EO-LoRA</label><audio controls src="assets/audio/jvnv/surprised_eolora.wav"></audio></div><div class="audio-item"><label>EO-LoRA + Flow-DGPO</label><audio controls src="assets/audio/jvnv/surprised_full.wav"></audio></div></div></div></article>
+                <tr>
+                  <td rowspan="2"><strong>Surprised</strong></td>
+                  <td>Male</td>
+                  <td><audio controls src="assets/audio/jvnv/surprised_m_prompt.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/surprised_m_f5.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/surprised_m_eolora.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/surprised_m_full.wav"></audio></td>
+                </tr>
+                <tr>
+                  <td>Female</td>
+                  <td><audio controls src="assets/audio/jvnv/surprised_f_prompt.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/surprised_f_f5.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/surprised_f_eolora.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/surprised_f_full.wav"></audio></td>
+                </tr>
 
-            <article class="sample-card"><div class="content"><div class="tag">Disgusted</div><div class="audio-stack"><div class="audio-item"><label>Audio prompt</label><audio controls src="assets/audio/jvnv/disgusted_prompt.wav"></audio></div><div class="audio-item"><label>F5-TTS (finetuned)</label><audio controls src="assets/audio/jvnv/disgusted_f5.wav"></audio></div><div class="audio-item"><label>EO-LoRA</label><audio controls src="assets/audio/jvnv/disgusted_eolora.wav"></audio></div><div class="audio-item"><label>EO-LoRA + Flow-DGPO</label><audio controls src="assets/audio/jvnv/disgusted_full.wav"></audio></div></div></div></article>
+                <tr>
+                  <td rowspan="2"><strong>Disgusted</strong></td>
+                  <td>Male</td>
+                  <td><audio controls src="assets/audio/jvnv/disgusted_m_prompt.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/disgusted_m_f5.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/disgusted_m_eolora.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/disgusted_m_full.wav"></audio></td>
+                </tr>
+                <tr>
+                  <td>Female</td>
+                  <td><audio controls src="assets/audio/jvnv/disgusted_f_prompt.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/disgusted_f_f5.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/disgusted_f_eolora.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/disgusted_f_full.wav"></audio></td>
+                </tr>
 
-            <article class="sample-card"><div class="content"><div class="tag">Fearful</div><div class="audio-stack"><div class="audio-item"><label>Audio prompt</label><audio controls src="assets/audio/jvnv/fearful_prompt.wav"></audio></div><div class="audio-item"><label>F5-TTS (finetuned)</label><audio controls src="assets/audio/jvnv/fearful_f5.wav"></audio></div><div class="audio-item"><label>EO-LoRA</label><audio controls src="assets/audio/jvnv/fearful_eolora.wav"></audio></div><div class="audio-item"><label>EO-LoRA + Flow-DGPO</label><audio controls src="assets/audio/jvnv/fearful_full.wav"></audio></div></div></div></article>
+                <tr>
+                  <td rowspan="2"><strong>Fearful</strong></td>
+                  <td>Male</td>
+                  <td><audio controls src="assets/audio/jvnv/fearful_m_prompt.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/fearful_m_f5.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/fearful_m_eolora.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/fearful_m_full.wav"></audio></td>
+                </tr>
+                <tr>
+                  <td>Female</td>
+                  <td><audio controls src="assets/audio/jvnv/fearful_f_prompt.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/fearful_f_f5.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/fearful_f_eolora.wav"></audio></td>
+                  <td><audio controls src="assets/audio/jvnv/fearful_f_full.wav"></audio></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
