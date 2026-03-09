@@ -7,17 +7,17 @@
   <meta name="description" content="Demo page for continuous and time-varying emotion control in zero-shot TTS." />
   <style>
     :root {
-      --bg: #0f1221;
-      --bg-soft: #171a2e;
-      --card: #1d223b;
-      --card-2: #242b4b;
-      --text: #eef2ff;
-      --muted: #b8c0e0;
-      --line: rgba(255,255,255,0.10);
-      --accent: #8b9cff;
-      --accent-2: #b78cff;
-      --good: #90e0a7;
-      --shadow: 0 16px 40px rgba(0,0,0,0.28);
+      --bg: #f7f8fe;
+      --bg-soft: #ffffff;
+      --card: #ffffff;
+      --card-2: #f6f7fd;
+      --text: #1b2340;
+      --muted: #5f6b8a;
+      --line: rgba(27,35,64,0.10);
+      --accent: #6f86ff;
+      --accent-2: #a684ff;
+      --good: #2f9d62;
+      --shadow: 0 14px 34px rgba(78, 92, 140, 0.10);
       --radius: 18px;
       --maxw: 1180px;
     }
@@ -28,9 +28,9 @@
       margin: 0;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(139,156,255,0.18), transparent 28%),
-        radial-gradient(circle at top right, rgba(183,140,255,0.12), transparent 24%),
-        linear-gradient(180deg, #0c1020 0%, var(--bg) 100%);
+        radial-gradient(circle at top left, rgba(111,134,255,0.10), transparent 30%),
+        radial-gradient(circle at top right, rgba(166,132,255,0.08), transparent 24%),
+        linear-gradient(180deg, #fbfbff 0%, var(--bg) 100%);
       color: var(--text);
       line-height: 1.6;
     }
@@ -48,7 +48,7 @@
       top: 0;
       z-index: 20;
       backdrop-filter: blur(14px);
-      background: rgba(11, 14, 26, 0.72);
+      background: rgba(255, 255, 255, 0.82);
       border-bottom: 1px solid var(--line);
     }
 
@@ -108,7 +108,7 @@
     .sample-card,
     .metric-card,
     .footer-card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(248,249,255,0.92));
       border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
@@ -178,7 +178,7 @@
     }
 
     .btn-secondary {
-      background: rgba(255,255,255,0.04);
+      background: rgba(111,134,255,0.06);
       color: var(--text);
     }
 
@@ -190,7 +190,7 @@
     }
 
     .kv {
-      background: var(--bg-soft);
+      background: #f8f9ff;
       border: 1px solid var(--line);
       border-radius: 14px;
       padding: 16px;
@@ -242,7 +242,7 @@
 
     .metric-card {
       padding: 18px;
-      background: linear-gradient(180deg, rgba(139,156,255,0.12), rgba(255,255,255,0.03));
+      background: linear-gradient(180deg, rgba(111,134,255,0.10), rgba(255,255,255,0.92));
     }
 
     .metric-card .label {
@@ -268,7 +268,7 @@
 
     .sample-card {
       overflow: hidden;
-      background: linear-gradient(180deg, var(--card), var(--card-2));
+      background: linear-gradient(180deg, #ffffff, #f7f8ff);
     }
 
     .sample-card .content {
@@ -278,9 +278,9 @@
     .tag {
       display: inline-block;
       font-size: 0.78rem;
-      color: #dbe1ff;
-      background: rgba(255,255,255,0.10);
-      border: 1px solid rgba(255,255,255,0.12);
+      color: #46527a;
+      background: rgba(111,134,255,0.08);
+      border: 1px solid rgba(111,134,255,0.12);
       padding: 4px 10px;
       border-radius: 999px;
       margin-bottom: 10px;
@@ -295,8 +295,8 @@
     .audio-item {
       padding: 12px;
       border-radius: 14px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(111,134,255,0.04);
+      border: 1px solid rgba(27,35,64,0.08);
     }
 
     .audio-item label {
@@ -500,25 +500,16 @@
 
         <div class="sample-group">
           <h3>Time-varying emotion control</h3>
-          <p class="small">Example transitions such as <span class="code">Angry → Calm</span>, <span class="code">Sad → Surprised</span>, and <span class="code">Calm → Fearful</span>.</p>
+          <p class="small">Each case includes <span class="code">audio prompt</span>, <span class="code">F5-TTS (finetuned)</span>, <span class="code">EO-LoRA</span>, and <span class="code">EO-LoRA + Flow-DGPO</span>.</p>
           <div class="sample-grid">
             <article class="sample-card">
               <div class="content">
                 <div class="tag">Angry → Calm</div>
-                <p class="muted">Prompt-guided emotion transition within a single utterance.</p>
                 <div class="audio-stack">
-                  <div class="audio-item">
-                    <label>Audio prompt</label>
-                    <audio controls src="assets/audio/timevarying/angry_calm_prompt.wav"></audio>
-                  </div>
-                  <div class="audio-item">
-                    <label>Baseline</label>
-                    <audio controls src="assets/audio/timevarying/angry_calm_baseline.wav"></audio>
-                  </div>
-                  <div class="audio-item">
-                    <label>EO-LoRA + Flow-DGPO</label>
-                    <audio controls src="assets/audio/timevarying/angry_calm_ours.wav"></audio>
-                  </div>
+                  <div class="audio-item"><label>Audio prompt</label><audio controls src="assets/audio/timevarying/angry_calm_prompt.wav"></audio></div>
+                  <div class="audio-item"><label>F5-TTS (finetuned)</label><audio controls src="assets/audio/timevarying/angry_calm_f5.wav"></audio></div>
+                  <div class="audio-item"><label>EO-LoRA</label><audio controls src="assets/audio/timevarying/angry_calm_eolora.wav"></audio></div>
+                  <div class="audio-item"><label>EO-LoRA + Flow-DGPO</label><audio controls src="assets/audio/timevarying/angry_calm_full.wav"></audio></div>
                 </div>
               </div>
             </article>
@@ -526,20 +517,23 @@
             <article class="sample-card">
               <div class="content">
                 <div class="tag">Sad → Surprised</div>
-                <p class="muted">Illustrates stronger emotional contrast and smoother trajectory following.</p>
                 <div class="audio-stack">
-                  <div class="audio-item">
-                    <label>Audio prompt</label>
-                    <audio controls src="assets/audio/timevarying/sad_surprised_prompt.wav"></audio>
-                  </div>
-                  <div class="audio-item">
-                    <label>Baseline</label>
-                    <audio controls src="assets/audio/timevarying/sad_surprised_baseline.wav"></audio>
-                  </div>
-                  <div class="audio-item">
-                    <label>EO-LoRA + Flow-DGPO</label>
-                    <audio controls src="assets/audio/timevarying/sad_surprised_ours.wav"></audio>
-                  </div>
+                  <div class="audio-item"><label>Audio prompt</label><audio controls src="assets/audio/timevarying/sad_surprised_prompt.wav"></audio></div>
+                  <div class="audio-item"><label>F5-TTS (finetuned)</label><audio controls src="assets/audio/timevarying/sad_surprised_f5.wav"></audio></div>
+                  <div class="audio-item"><label>EO-LoRA</label><audio controls src="assets/audio/timevarying/sad_surprised_eolora.wav"></audio></div>
+                  <div class="audio-item"><label>EO-LoRA + Flow-DGPO</label><audio controls src="assets/audio/timevarying/sad_surprised_full.wav"></audio></div>
+                </div>
+              </div>
+            </article>
+
+            <article class="sample-card">
+              <div class="content">
+                <div class="tag">Happy → Disgusted</div>
+                <div class="audio-stack">
+                  <div class="audio-item"><label>Audio prompt</label><audio controls src="assets/audio/timevarying/happy_disgusted_prompt.wav"></audio></div>
+                  <div class="audio-item"><label>F5-TTS (finetuned)</label><audio controls src="assets/audio/timevarying/happy_disgusted_f5.wav"></audio></div>
+                  <div class="audio-item"><label>EO-LoRA</label><audio controls src="assets/audio/timevarying/happy_disgusted_eolora.wav"></audio></div>
+                  <div class="audio-item"><label>EO-LoRA + Flow-DGPO</label><audio controls src="assets/audio/timevarying/happy_disgusted_full.wav"></audio></div>
                 </div>
               </div>
             </article>
@@ -547,20 +541,23 @@
             <article class="sample-card">
               <div class="content">
                 <div class="tag">Calm → Fearful</div>
-                <p class="muted">Useful for showing whether the generated speech follows the intended frame-level VAD trajectory.</p>
                 <div class="audio-stack">
-                  <div class="audio-item">
-                    <label>Audio prompt</label>
-                    <audio controls src="assets/audio/timevarying/calm_fearful_prompt.wav"></audio>
-                  </div>
-                  <div class="audio-item">
-                    <label>Baseline</label>
-                    <audio controls src="assets/audio/timevarying/calm_fearful_baseline.wav"></audio>
-                  </div>
-                  <div class="audio-item">
-                    <label>EO-LoRA + Flow-DGPO</label>
-                    <audio controls src="assets/audio/timevarying/calm_fearful_ours.wav"></audio>
-                  </div>
+                  <div class="audio-item"><label>Audio prompt</label><audio controls src="assets/audio/timevarying/calm_fearful_prompt.wav"></audio></div>
+                  <div class="audio-item"><label>F5-TTS (finetuned)</label><audio controls src="assets/audio/timevarying/calm_fearful_f5.wav"></audio></div>
+                  <div class="audio-item"><label>EO-LoRA</label><audio controls src="assets/audio/timevarying/calm_fearful_eolora.wav"></audio></div>
+                  <div class="audio-item"><label>EO-LoRA + Flow-DGPO</label><audio controls src="assets/audio/timevarying/calm_fearful_full.wav"></audio></div>
+                </div>
+              </div>
+            </article>
+
+            <article class="sample-card">
+              <div class="content">
+                <div class="tag">Sad → Happy</div>
+                <div class="audio-stack">
+                  <div class="audio-item"><label>Audio prompt</label><audio controls src="assets/audio/timevarying/sad_happy_prompt.wav"></audio></div>
+                  <div class="audio-item"><label>F5-TTS (finetuned)</label><audio controls src="assets/audio/timevarying/sad_happy_f5.wav"></audio></div>
+                  <div class="audio-item"><label>EO-LoRA</label><audio controls src="assets/audio/timevarying/sad_happy_eolora.wav"></audio></div>
+                  <div class="audio-item"><label>EO-LoRA + Flow-DGPO</label><audio controls src="assets/audio/timevarying/sad_happy_full.wav"></audio></div>
                 </div>
               </div>
             </article>
@@ -568,123 +565,26 @@
         </div>
 
         <div class="sample-group" style="margin-top: 30px;">
-          <h3>Cross-lingual emotion transfer</h3>
-          <p class="small">Japanese prompt speech with English target text, following the JVNV S2ST-style setup described in the paper.</p>
+          <h3>JVNV samples</h3>
+          <p class="small">Emotion categories: <span class="code">happy</span>, <span class="code">sad</span>, <span class="code">angry</span>, <span class="code">surprised</span>, <span class="code">disgusted</span>, and <span class="code">fearful</span>. Each case includes the same four systems.</p>
           <div class="sample-grid">
-            <article class="sample-card">
-              <div class="content">
-                <div class="tag">Happy</div>
-                <p class="muted">Cross-lingual transfer of speaker traits and emotional nuance.</p>
-                <div class="audio-stack">
-                  <div class="audio-item">
-                    <label>Source audio (Japanese)</label>
-                    <audio controls src="assets/audio/s2st/happy_source.wav"></audio>
-                  </div>
-                  <div class="audio-item">
-                    <label>Baseline translated speech</label>
-                    <audio controls src="assets/audio/s2st/happy_baseline.wav"></audio>
-                  </div>
-                  <div class="audio-item">
-                    <label>EO-LoRA + Flow-DGPO</label>
-                    <audio controls src="assets/audio/s2st/happy_ours.wav"></audio>
-                  </div>
-                </div>
-              </div>
-            </article>
+            <article class="sample-card"><div class="content"><div class="tag">Happy</div><div class="audio-stack"><div class="audio-item"><label>Audio prompt</label><audio controls src="assets/audio/jvnv/happy_prompt.wav"></audio></div><div class="audio-item"><label>F5-TTS (finetuned)</label><audio controls src="assets/audio/jvnv/happy_f5.wav"></audio></div><div class="audio-item"><label>EO-LoRA</label><audio controls src="assets/audio/jvnv/happy_eolora.wav"></audio></div><div class="audio-item"><label>EO-LoRA + Flow-DGPO</label><audio controls src="assets/audio/jvnv/happy_full.wav"></audio></div></div></div></article>
 
-            <article class="sample-card">
-              <div class="content">
-                <div class="tag">Sad</div>
-                <p class="muted">Designed to show preservation of low-energy but expressive emotional cues.</p>
-                <div class="audio-stack">
-                  <div class="audio-item">
-                    <label>Source audio (Japanese)</label>
-                    <audio controls src="assets/audio/s2st/sad_source.wav"></audio>
-                  </div>
-                  <div class="audio-item">
-                    <label>Baseline translated speech</label>
-                    <audio controls src="assets/audio/s2st/sad_baseline.wav"></audio>
-                  </div>
-                  <div class="audio-item">
-                    <label>EO-LoRA + Flow-DGPO</label>
-                    <audio controls src="assets/audio/s2st/sad_ours.wav"></audio>
-                  </div>
-                </div>
-              </div>
-            </article>
+            <article class="sample-card"><div class="content"><div class="tag">Sad</div><div class="audio-stack"><div class="audio-item"><label>Audio prompt</label><audio controls src="assets/audio/jvnv/sad_prompt.wav"></audio></div><div class="audio-item"><label>F5-TTS (finetuned)</label><audio controls src="assets/audio/jvnv/sad_f5.wav"></audio></div><div class="audio-item"><label>EO-LoRA</label><audio controls src="assets/audio/jvnv/sad_eolora.wav"></audio></div><div class="audio-item"><label>EO-LoRA + Flow-DGPO</label><audio controls src="assets/audio/jvnv/sad_full.wav"></audio></div></div></div></article>
 
-            <article class="sample-card">
-              <div class="content">
-                <div class="tag">Angry</div>
-                <p class="muted">Highlights whether strong emotion survives both language transfer and speaker conditioning.</p>
-                <div class="audio-stack">
-                  <div class="audio-item">
-                    <label>Source audio (Japanese)</label>
-                    <audio controls src="assets/audio/s2st/angry_source.wav"></audio>
-                  </div>
-                  <div class="audio-item">
-                    <label>Baseline translated speech</label>
-                    <audio controls src="assets/audio/s2st/angry_baseline.wav"></audio>
-                  </div>
-                  <div class="audio-item">
-                    <label>EO-LoRA + Flow-DGPO</label>
-                    <audio controls src="assets/audio/s2st/angry_ours.wav"></audio>
-                  </div>
-                </div>
-              </div>
-            </article>
+            <article class="sample-card"><div class="content"><div class="tag">Angry</div><div class="audio-stack"><div class="audio-item"><label>Audio prompt</label><audio controls src="assets/audio/jvnv/angry_prompt.wav"></audio></div><div class="audio-item"><label>F5-TTS (finetuned)</label><audio controls src="assets/audio/jvnv/angry_f5.wav"></audio></div><div class="audio-item"><label>EO-LoRA</label><audio controls src="assets/audio/jvnv/angry_eolora.wav"></audio></div><div class="audio-item"><label>EO-LoRA + Flow-DGPO</label><audio controls src="assets/audio/jvnv/angry_full.wav"></audio></div></div></div></article>
+
+            <article class="sample-card"><div class="content"><div class="tag">Surprised</div><div class="audio-stack"><div class="audio-item"><label>Audio prompt</label><audio controls src="assets/audio/jvnv/surprised_prompt.wav"></audio></div><div class="audio-item"><label>F5-TTS (finetuned)</label><audio controls src="assets/audio/jvnv/surprised_f5.wav"></audio></div><div class="audio-item"><label>EO-LoRA</label><audio controls src="assets/audio/jvnv/surprised_eolora.wav"></audio></div><div class="audio-item"><label>EO-LoRA + Flow-DGPO</label><audio controls src="assets/audio/jvnv/surprised_full.wav"></audio></div></div></div></article>
+
+            <article class="sample-card"><div class="content"><div class="tag">Disgusted</div><div class="audio-stack"><div class="audio-item"><label>Audio prompt</label><audio controls src="assets/audio/jvnv/disgusted_prompt.wav"></audio></div><div class="audio-item"><label>F5-TTS (finetuned)</label><audio controls src="assets/audio/jvnv/disgusted_f5.wav"></audio></div><div class="audio-item"><label>EO-LoRA</label><audio controls src="assets/audio/jvnv/disgusted_eolora.wav"></audio></div><div class="audio-item"><label>EO-LoRA + Flow-DGPO</label><audio controls src="assets/audio/jvnv/disgusted_full.wav"></audio></div></div></div></article>
+
+            <article class="sample-card"><div class="content"><div class="tag">Fearful</div><div class="audio-stack"><div class="audio-item"><label>Audio prompt</label><audio controls src="assets/audio/jvnv/fearful_prompt.wav"></audio></div><div class="audio-item"><label>F5-TTS (finetuned)</label><audio controls src="assets/audio/jvnv/fearful_f5.wav"></audio></div><div class="audio-item"><label>EO-LoRA</label><audio controls src="assets/audio/jvnv/fearful_eolora.wav"></audio></div><div class="audio-item"><label>EO-LoRA + Flow-DGPO</label><audio controls src="assets/audio/jvnv/fearful_full.wav"></audio></div></div></div></article>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="comparisons">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2>Comparison layout</h2>
-            <p class="section-intro">A compact table format for organizing prompts, baselines, and your method in a paper-friendly demo page.</p>
-          </div>
-        </div>
-
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Setting</th>
-                <th>Prompt</th>
-                <th>Baseline</th>
-                <th>EO-LoRA</th>
-                <th>EO-LoRA + Flow-DGPO</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Angry → Calm</td>
-                <td><audio controls src="assets/audio/table/angry_calm_prompt.wav"></audio></td>
-                <td><audio controls src="assets/audio/table/angry_calm_baseline.wav"></audio></td>
-                <td><audio controls src="assets/audio/table/angry_calm_eolora.wav"></audio></td>
-                <td><audio controls src="assets/audio/table/angry_calm_full.wav"></audio></td>
-              </tr>
-              <tr>
-                <td>Sad → Surprised</td>
-                <td><audio controls src="assets/audio/table/sad_surprised_prompt.wav"></audio></td>
-                <td><audio controls src="assets/audio/table/sad_surprised_baseline.wav"></audio></td>
-                <td><audio controls src="assets/audio/table/sad_surprised_eolora.wav"></audio></td>
-                <td><audio controls src="assets/audio/table/sad_surprised_full.wav"></audio></td>
-              </tr>
-              <tr>
-                <td>JVNV S2ST / Happy</td>
-                <td><audio controls src="assets/audio/table/jvnv_happy_prompt.wav"></audio></td>
-                <td><audio controls src="assets/audio/table/jvnv_happy_baseline.wav"></audio></td>
-                <td><audio controls src="assets/audio/table/jvnv_happy_eolora.wav"></audio></td>
-                <td><audio controls src="assets/audio/table/jvnv_happy_full.wav"></audio></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
+    
 
     <section id="paper">
       <div class="container two-col-grid">
