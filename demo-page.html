@@ -1,32 +1,737 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Anonymous Demo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EO-LoRA Demo</title>
+  <meta name="description" content="Demo page for continuous and time-varying emotion control in zero-shot TTS." />
   <style>
-    body{font-family:Arial, sans-serif; max-width: 900px; margin: 40px auto; line-height:1.6;}
-    .card{border:1px solid #ddd; border-radius:12px; padding:16px; margin:16px 0;}
-    audio{width:100%;}
+    :root {
+      --bg: #0f1221;
+      --bg-soft: #171a2e;
+      --card: #1d223b;
+      --card-2: #242b4b;
+      --text: #eef2ff;
+      --muted: #b8c0e0;
+      --line: rgba(255,255,255,0.10);
+      --accent: #8b9cff;
+      --accent-2: #b78cff;
+      --good: #90e0a7;
+      --shadow: 0 16px 40px rgba(0,0,0,0.28);
+      --radius: 18px;
+      --maxw: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(139,156,255,0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(183,140,255,0.12), transparent 24%),
+        linear-gradient(180deg, #0c1020 0%, var(--bg) 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(calc(100% - 32px), var(--maxw));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(11, 14, 26, 0.72);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-badge {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 16px rgba(139,156,255,0.8);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .hero {
+      padding: 72px 0 36px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .hero-card,
+    .panel,
+    .sample-card,
+    .metric-card,
+    .footer-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 34px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--good);
+      font-size: 0.92rem;
+      margin-bottom: 14px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--good);
+    }
+
+    h1, h2, h3 { line-height: 1.15; margin: 0 0 14px; }
+    h1 { font-size: clamp(2.2rem, 4.4vw, 3.8rem); }
+    h2 { font-size: clamp(1.5rem, 2.8vw, 2.2rem); }
+    h3 { font-size: 1.15rem; }
+
+    .hero p,
+    .section-intro,
+    .small,
+    .muted {
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-weight: 600;
+      border: 1px solid var(--line);
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,0.18);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      border: none;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+    }
+
+    .hero-side {
+      padding: 24px;
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .kv {
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .kv strong {
+      display: block;
+      font-size: 1.02rem;
+      margin-bottom: 4px;
+    }
+
+    section {
+      padding: 20px 0 16px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .overview-grid,
+    .metrics-grid,
+    .sample-grid,
+    .two-col-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .overview-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .panel {
+      padding: 22px;
+    }
+
+    .panel ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .metrics-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .metric-card {
+      padding: 18px;
+      background: linear-gradient(180deg, rgba(139,156,255,0.12), rgba(255,255,255,0.03));
+    }
+
+    .metric-card .label {
+      font-size: 0.86rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .metric-card .value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-top: 6px;
+    }
+
+    .sample-group {
+      margin-top: 10px;
+    }
+
+    .sample-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .sample-card {
+      overflow: hidden;
+      background: linear-gradient(180deg, var(--card), var(--card-2));
+    }
+
+    .sample-card .content {
+      padding: 18px;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      color: #dbe1ff;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+
+    .audio-stack {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .audio-item {
+      padding: 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .audio-item label {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    audio {
+      width: 100%;
+      height: 40px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.02);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+
+    th, td {
+      padding: 14px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    th {
+      font-size: 0.88rem;
+      color: #d7ddff;
+      background: rgba(255,255,255,0.04);
+    }
+
+    td {
+      color: var(--muted);
+    }
+
+    .two-col-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .footer {
+      padding: 28px 0 60px;
+    }
+
+    .footer-card {
+      padding: 22px;
+    }
+
+    .code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 2px 8px;
+      display: inline-block;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .overview-grid,
+      .metrics-grid,
+      .sample-grid,
+      .two-col-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero { padding-top: 42px; }
+      .section-head { align-items: start; flex-direction: column; }
+    }
   </style>
 </head>
 <body>
-  <h1>Anonymous Demo Page</h1>
-  <p>This page provides demo samples and supplementary material for anonymous review.</p>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#top">
+        <span class="brand-badge"></span>
+        <span>EO-LoRA Demo</span>
+      </a>
+      <nav class="nav-links" aria-label="Section navigation">
+        <a href="#overview">Overview</a>
+        <a href="#samples">Samples</a>
+        <a href="#comparisons">Comparisons</a>
+        <a href="#ethics">Ethics</a>
+      </nav>
+    </div>
+  </header>
 
-  <div class="card">
-    <h2>Audio Samples</h2>
-    <p>Sample 1</p>
-    <audio controls src="assets/sample1.wav"></audio>
-    <p>Sample 2</p>
-    <audio controls src="assets/sample2.wav"></audio>
-  </div>
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-card">
+          <div class="eyebrow"><span class="dot"></span><span>Anonymous demo page</span></div>
+          <h1>Continuous Time-Varying Emotion Control for Zero-Shot TTS</h1>
+          <p>
+            This page presents demo samples for <strong>Emotion Orthogonal LoRA (EO-LoRA)</strong>,
+            a method for continuous and time-varying emotion control in flow-matching-based zero-shot text-to-speech.
+            The approach injects Valence, Arousal, and Dominance (VAD) signals through three aligned low-rank branches,
+            and further improves controllability with a preference-based alignment stage, <strong>Flow-DGPO</strong>.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#samples">Listen to samples</a>
+            <a class="btn btn-secondary" href="#paper">Paper link</a>
+          </div>
+        </div>
 
-  <div class="card">
-    <h2>Links</h2>
-    <ul>
-      <li><a href="assets/supp.pdf">Supplementary PDF</a></li>
-      <li><a href="assets/results.csv">Results CSV</a></li>
-    </ul>
-  </div>
+        <aside class="hero-card hero-side">
+          <div class="kv">
+            <strong>Core capabilities</strong>
+            <span>Continuous VAD control, time-varying emotion trajectories, and zero-shot speaker-conditioned synthesis.</span>
+          </div>
+          <div class="kv">
+            <strong>Evaluation settings</strong>
+            <span>Demo structure follows the paper’s time-varying control and cross-lingual emotion transfer settings.</span>
+          </div>
+          <div class="kv">
+            <strong>How to use this page</strong>
+            <span>Replace placeholder audio paths and paper link with your hosted assets before publishing.</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="overview">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Overview</h2>
+            <p class="section-intro">
+              The paper studies continuous and time-varying emotion control in zero-shot TTS using VAD-conditioned low-rank adaptation.
+            </p>
+          </div>
+        </div>
+
+        <div class="overview-grid">
+          <article class="panel">
+            <h3>EO-LoRA</h3>
+            <p class="muted">
+              Three separate low-rank branches are aligned with Valence, Arousal, and Dominance. Each branch is scaled by its corresponding control signal at each time step.
+            </p>
+          </article>
+
+          <article class="panel">
+            <h3>Time-varying control</h3>
+            <p class="muted">
+              Frame-level VAD sequences allow emotion to evolve within an utterance, enabling transitions such as calm → fearful or angry → calm.
+            </p>
+          </article>
+
+          <article class="panel">
+            <h3>Flow-DGPO</h3>
+            <p class="muted">
+              A preference-based reinforcement learning stage improves emotion controllability while preserving intelligibility and speaker similarity.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="label">Control signal</div>
+            <div class="value">V / A / D</div>
+          </div>
+          <div class="metric-card">
+            <div class="label">Adaptation type</div>
+            <div class="value">LoRA</div>
+          </div>
+          <div class="metric-card">
+            <div class="label">Generation mode</div>
+            <div class="value">Zero-shot</div>
+          </div>
+          <div class="metric-card">
+            <div class="label">Target setting</div>
+            <div class="value">Time-varying</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="samples">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Featured samples</h2>
+            <p class="section-intro">
+              Below are example layouts for the two main settings emphasized in the paper: time-varying emotion control and cross-lingual emotion transfer.
+            </p>
+          </div>
+        </div>
+
+        <div class="sample-group">
+          <h3>Time-varying emotion control</h3>
+          <p class="small">Example transitions such as <span class="code">Angry → Calm</span>, <span class="code">Sad → Surprised</span>, and <span class="code">Calm → Fearful</span>.</p>
+          <div class="sample-grid">
+            <article class="sample-card">
+              <div class="content">
+                <div class="tag">Angry → Calm</div>
+                <p class="muted">Prompt-guided emotion transition within a single utterance.</p>
+                <div class="audio-stack">
+                  <div class="audio-item">
+                    <label>Audio prompt</label>
+                    <audio controls src="assets/audio/timevarying/angry_calm_prompt.wav"></audio>
+                  </div>
+                  <div class="audio-item">
+                    <label>Baseline</label>
+                    <audio controls src="assets/audio/timevarying/angry_calm_baseline.wav"></audio>
+                  </div>
+                  <div class="audio-item">
+                    <label>EO-LoRA + Flow-DGPO</label>
+                    <audio controls src="assets/audio/timevarying/angry_calm_ours.wav"></audio>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="sample-card">
+              <div class="content">
+                <div class="tag">Sad → Surprised</div>
+                <p class="muted">Illustrates stronger emotional contrast and smoother trajectory following.</p>
+                <div class="audio-stack">
+                  <div class="audio-item">
+                    <label>Audio prompt</label>
+                    <audio controls src="assets/audio/timevarying/sad_surprised_prompt.wav"></audio>
+                  </div>
+                  <div class="audio-item">
+                    <label>Baseline</label>
+                    <audio controls src="assets/audio/timevarying/sad_surprised_baseline.wav"></audio>
+                  </div>
+                  <div class="audio-item">
+                    <label>EO-LoRA + Flow-DGPO</label>
+                    <audio controls src="assets/audio/timevarying/sad_surprised_ours.wav"></audio>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="sample-card">
+              <div class="content">
+                <div class="tag">Calm → Fearful</div>
+                <p class="muted">Useful for showing whether the generated speech follows the intended frame-level VAD trajectory.</p>
+                <div class="audio-stack">
+                  <div class="audio-item">
+                    <label>Audio prompt</label>
+                    <audio controls src="assets/audio/timevarying/calm_fearful_prompt.wav"></audio>
+                  </div>
+                  <div class="audio-item">
+                    <label>Baseline</label>
+                    <audio controls src="assets/audio/timevarying/calm_fearful_baseline.wav"></audio>
+                  </div>
+                  <div class="audio-item">
+                    <label>EO-LoRA + Flow-DGPO</label>
+                    <audio controls src="assets/audio/timevarying/calm_fearful_ours.wav"></audio>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="sample-group" style="margin-top: 30px;">
+          <h3>Cross-lingual emotion transfer</h3>
+          <p class="small">Japanese prompt speech with English target text, following the JVNV S2ST-style setup described in the paper.</p>
+          <div class="sample-grid">
+            <article class="sample-card">
+              <div class="content">
+                <div class="tag">Happy</div>
+                <p class="muted">Cross-lingual transfer of speaker traits and emotional nuance.</p>
+                <div class="audio-stack">
+                  <div class="audio-item">
+                    <label>Source audio (Japanese)</label>
+                    <audio controls src="assets/audio/s2st/happy_source.wav"></audio>
+                  </div>
+                  <div class="audio-item">
+                    <label>Baseline translated speech</label>
+                    <audio controls src="assets/audio/s2st/happy_baseline.wav"></audio>
+                  </div>
+                  <div class="audio-item">
+                    <label>EO-LoRA + Flow-DGPO</label>
+                    <audio controls src="assets/audio/s2st/happy_ours.wav"></audio>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="sample-card">
+              <div class="content">
+                <div class="tag">Sad</div>
+                <p class="muted">Designed to show preservation of low-energy but expressive emotional cues.</p>
+                <div class="audio-stack">
+                  <div class="audio-item">
+                    <label>Source audio (Japanese)</label>
+                    <audio controls src="assets/audio/s2st/sad_source.wav"></audio>
+                  </div>
+                  <div class="audio-item">
+                    <label>Baseline translated speech</label>
+                    <audio controls src="assets/audio/s2st/sad_baseline.wav"></audio>
+                  </div>
+                  <div class="audio-item">
+                    <label>EO-LoRA + Flow-DGPO</label>
+                    <audio controls src="assets/audio/s2st/sad_ours.wav"></audio>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="sample-card">
+              <div class="content">
+                <div class="tag">Angry</div>
+                <p class="muted">Highlights whether strong emotion survives both language transfer and speaker conditioning.</p>
+                <div class="audio-stack">
+                  <div class="audio-item">
+                    <label>Source audio (Japanese)</label>
+                    <audio controls src="assets/audio/s2st/angry_source.wav"></audio>
+                  </div>
+                  <div class="audio-item">
+                    <label>Baseline translated speech</label>
+                    <audio controls src="assets/audio/s2st/angry_baseline.wav"></audio>
+                  </div>
+                  <div class="audio-item">
+                    <label>EO-LoRA + Flow-DGPO</label>
+                    <audio controls src="assets/audio/s2st/angry_ours.wav"></audio>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="comparisons">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Comparison layout</h2>
+            <p class="section-intro">A compact table format for organizing prompts, baselines, and your method in a paper-friendly demo page.</p>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Setting</th>
+                <th>Prompt</th>
+                <th>Baseline</th>
+                <th>EO-LoRA</th>
+                <th>EO-LoRA + Flow-DGPO</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Angry → Calm</td>
+                <td><audio controls src="assets/audio/table/angry_calm_prompt.wav"></audio></td>
+                <td><audio controls src="assets/audio/table/angry_calm_baseline.wav"></audio></td>
+                <td><audio controls src="assets/audio/table/angry_calm_eolora.wav"></audio></td>
+                <td><audio controls src="assets/audio/table/angry_calm_full.wav"></audio></td>
+              </tr>
+              <tr>
+                <td>Sad → Surprised</td>
+                <td><audio controls src="assets/audio/table/sad_surprised_prompt.wav"></audio></td>
+                <td><audio controls src="assets/audio/table/sad_surprised_baseline.wav"></audio></td>
+                <td><audio controls src="assets/audio/table/sad_surprised_eolora.wav"></audio></td>
+                <td><audio controls src="assets/audio/table/sad_surprised_full.wav"></audio></td>
+              </tr>
+              <tr>
+                <td>JVNV S2ST / Happy</td>
+                <td><audio controls src="assets/audio/table/jvnv_happy_prompt.wav"></audio></td>
+                <td><audio controls src="assets/audio/table/jvnv_happy_baseline.wav"></audio></td>
+                <td><audio controls src="assets/audio/table/jvnv_happy_eolora.wav"></audio></td>
+                <td><audio controls src="assets/audio/table/jvnv_happy_full.wav"></audio></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="paper">
+      <div class="container two-col-grid">
+        <article class="panel">
+          <h2>Paper</h2>
+          <p class="muted">
+            Title: <strong>Continuous Time-Varying Emotion Control Zero-Shot Text-To-Speech With Emotion Orthogonal LoRA</strong>
+          </p>
+          <p class="muted">
+            Replace the button below with your anonymous paper link, arXiv link, or supplementary material page.
+          </p>
+          <a class="btn btn-secondary" href="#">Add paper URL here</a>
+        </article>
+
+        <article class="panel">
+          <h2>Deployment notes</h2>
+          <ul>
+            <li>Host the audio files under a relative folder such as <span class="code">assets/audio/</span>.</li>
+            <li>Keep file names short and consistent with the sample labels.</li>
+            <li>For anonymous review, avoid names, institutions, personal domains, and identifiable analytics scripts.</li>
+            <li>You can publish this single HTML file on GitHub Pages or any static site host.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="ethics">
+      <div class="container">
+        <div class="footer-card">
+          <h2>Ethics statement</h2>
+          <p class="muted">
+            This demo is intended for research presentation only. Speech synthesis systems with strong speaker similarity and emotional control may be misused for impersonation or deceptive content generation.
+            Any public release should include appropriate safeguards, consent procedures, and misuse mitigation measures.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-card">
+      <strong>Notes</strong>
+      <p class="muted" style="margin: 10px 0 0;">
+        This page is a clean standalone replacement for the source template: branding, tracking scripts, cookie banners, external social widgets,
+        and organization-specific navigation were intentionally removed.
+      </p>
+    </div>
+  </footer>
 </body>
 </html>
