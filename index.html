@@ -387,7 +387,6 @@
       <nav class="nav-links" aria-label="Section navigation">
         <a href="#overview">Overview</a>
         <a href="#samples">Samples</a>
-        <a href="#comparisons">Comparisons</a>
         <a href="#ethics">Ethics</a>
       </nav>
     </div>
@@ -395,106 +394,47 @@
 
   <main id="top">
     <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-card">
+      <div class="container">
+        <div class="hero-card" style="padding: 28px 34px;">
           <div class="eyebrow"><span class="dot"></span><span>Anonymous demo page</span></div>
-          <h1>Continuous Time-Varying Emotion Control for Zero-Shot TTS</h1>
-          <p>
-            This page presents demo samples for <strong>Emotion Orthogonal LoRA (EO-LoRA)</strong>,
-            a method for continuous and time-varying emotion control in flow-matching-based zero-shot text-to-speech.
-            The approach injects Valence, Arousal, and Dominance (VAD) signals through three aligned low-rank branches,
-            and further improves controllability with a preference-based alignment stage, <strong>Flow-DGPO</strong>.
+          <h1 style="font-size: clamp(2.2rem, 4vw, 3.2rem); margin-bottom: 16px; max-width: 1100px;">Continuous Time-Varying Emotion Control Zero-Shot Text-To-Speech With Emotion Orthogonal LoRA</h1>
+          <p style="font-size: 1.05rem; max-width: 1050px; margin: 0; color: var(--muted);">
+            This page presents demo samples for EO-LoRA, a method for continuous and time-varying emotion control in zero-shot text-to-speech.
+            The model injects Valence, Arousal, and Dominance (VAD) signals through three aligned low-rank branches, and Flow-DGPO further improves controllability while preserving intelligibility and speaker similarity.
           </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#samples">Listen to samples</a>
-            <a class="btn btn-secondary" href="#paper">Paper link</a>
-          </div>
         </div>
-
-        <aside class="hero-card hero-side">
-          <div class="kv">
-            <strong>Core capabilities</strong>
-            <span>Continuous VAD control, time-varying emotion trajectories, and zero-shot speaker-conditioned synthesis.</span>
-          </div>
-          <div class="kv">
-            <strong>Evaluation settings</strong>
-            <span>Demo structure follows the paper’s time-varying control and cross-lingual emotion transfer settings.</span>
-          </div>
-          <div class="kv">
-            <strong>How to use this page</strong>
-            <span>Replace placeholder audio paths and paper link with your hosted assets before publishing.</span>
-          </div>
-        </aside>
       </div>
     </section>
 
     <section id="overview">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head" style="margin-bottom: 10px;">
           <div>
             <h2>Overview</h2>
-            <p class="section-intro">
-              The paper studies continuous and time-varying emotion control in zero-shot TTS using VAD-conditioned low-rank adaptation.
+            <p class="section-intro" style="max-width: 1050px;">
+              EO-LoRA performs continuous emotion control with VAD-aligned LoRA branches and supports time-varying emotional trajectories within a single utterance. Flow-DGPO is used as a preference-based alignment stage to further improve controllability.
             </p>
           </div>
         </div>
 
-        <div class="overview-grid">
-          <article class="panel">
-            <h3>EO-LoRA</h3>
-            <p class="muted">
-              Three separate low-rank branches are aligned with Valence, Arousal, and Dominance. Each branch is scaled by its corresponding control signal at each time step.
-            </p>
-          </article>
-
-          <article class="panel">
-            <h3>Time-varying control</h3>
-            <p class="muted">
-              Frame-level VAD sequences allow emotion to evolve within an utterance, enabling transitions such as calm → fearful or angry → calm.
-            </p>
-          </article>
-
-          <article class="panel">
-            <h3>Flow-DGPO</h3>
-            <p class="muted">
-              A preference-based reinforcement learning stage improves emotion controllability while preserving intelligibility and speaker similarity.
-            </p>
-          </article>
+        <div class="panel" style="padding: 26px; margin-top: 8px;">
+          <h3 style="margin-bottom: 14px;">Model overview</h3>
+          <div style="border: 1.5px dashed rgba(27,35,64,0.20); border-radius: 14px; background: #fafbff; padding: 36px 24px; text-align: center; color: var(--muted);">
+            Insert model figure here
+            <div style="font-size: 0.95rem; margin-top: 8px;">Replace this placeholder with your exported figure from the PDF.</div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section>
-      <div class="container">
-        <div class="metrics-grid">
-          <div class="metric-card">
-            <div class="label">Control signal</div>
-            <div class="value">V / A / D</div>
-          </div>
-          <div class="metric-card">
-            <div class="label">Adaptation type</div>
-            <div class="value">LoRA</div>
-          </div>
-          <div class="metric-card">
-            <div class="label">Generation mode</div>
-            <div class="value">Zero-shot</div>
-          </div>
-          <div class="metric-card">
-            <div class="label">Target setting</div>
-            <div class="value">Time-varying</div>
-          </div>
-        </div>
-      </div>
-    </section>
+    
 
     <section id="samples">
       <div class="container">
         <div class="section-head">
           <div>
             <h2>Samples</h2>
-            <p class="section-intro">
-              The layout below follows a horizontal comparison style. Each emotion setting contains two rows to represent two tracks, which can be used for male and female examples.
-            </p>
+            <p class="section-intro">The layout below follows a horizontal comparison style. Each setting contains two rows for male and female examples.</p>
           </div>
         </div>
 
@@ -505,8 +445,8 @@
             <table>
               <thead>
                 <tr>
-                  <th style="width: 150px;">Transition</th>
-                  <th style="width: 110px;">Track</th>
+                  <th style="width: 150px; text-align: center;">Transition</th>
+                  <th style="width: 110px; text-align: center;">Track</th>
                   <th>Audio prompt</th>
                   <th>F5-TTS (finetuned)</th>
                   <th>EO-LoRA</th>
@@ -515,7 +455,7 @@
               </thead>
               <tbody>
                 <tr>
-                  <td rowspan="2"><strong>Angry → Calm</strong></td>
+                  <td rowspan="2" style="text-align: center; vertical-align: middle;"><strong>Angry → Calm</strong></td>
                   <td>Male</td>
                   <td><audio controls src="assets/audio/timevarying/angry_calm_m_prompt.wav"></audio></td>
                   <td><audio controls src="assets/audio/timevarying/angry_calm_m_f5.wav"></audio></td>
@@ -531,7 +471,7 @@
                 </tr>
 
                 <tr>
-                  <td rowspan="2"><strong>Sad → Surprised</strong></td>
+                  <td rowspan="2" style="text-align: center; vertical-align: middle;"><strong>Sad → Surprised</strong></td>
                   <td>Male</td>
                   <td><audio controls src="assets/audio/timevarying/sad_surprised_m_prompt.wav"></audio></td>
                   <td><audio controls src="assets/audio/timevarying/sad_surprised_m_f5.wav"></audio></td>
@@ -547,7 +487,7 @@
                 </tr>
 
                 <tr>
-                  <td rowspan="2"><strong>Happy → Disgusted</strong></td>
+                  <td rowspan="2" style="text-align: center; vertical-align: middle;"><strong>Happy → Disgusted</strong></td>
                   <td>Male</td>
                   <td><audio controls src="assets/audio/timevarying/happy_disgusted_m_prompt.wav"></audio></td>
                   <td><audio controls src="assets/audio/timevarying/happy_disgusted_m_f5.wav"></audio></td>
@@ -563,7 +503,7 @@
                 </tr>
 
                 <tr>
-                  <td rowspan="2"><strong>Calm → Fearful</strong></td>
+                  <td rowspan="2" style="text-align: center; vertical-align: middle;"><strong>Calm → Fearful</strong></td>
                   <td>Male</td>
                   <td><audio controls src="assets/audio/timevarying/calm_fearful_m_prompt.wav"></audio></td>
                   <td><audio controls src="assets/audio/timevarying/calm_fearful_m_f5.wav"></audio></td>
@@ -579,7 +519,7 @@
                 </tr>
 
                 <tr>
-                  <td rowspan="2"><strong>Sad → Happy</strong></td>
+                  <td rowspan="2" style="text-align: center; vertical-align: middle;"><strong>Sad → Happy</strong></td>
                   <td>Male</td>
                   <td><audio controls src="assets/audio/timevarying/sad_happy_m_prompt.wav"></audio></td>
                   <td><audio controls src="assets/audio/timevarying/sad_happy_m_f5.wav"></audio></td>
@@ -605,8 +545,8 @@
             <table>
               <thead>
                 <tr>
-                  <th style="width: 150px;">Emotion</th>
-                  <th style="width: 110px;">Track</th>
+                  <th style="width: 150px; text-align: center;">Emotion</th>
+                  <th style="width: 110px; text-align: center;">Track</th>
                   <th>Audio prompt</th>
                   <th>F5-TTS (finetuned)</th>
                   <th>EO-LoRA</th>
@@ -615,7 +555,7 @@
               </thead>
               <tbody>
                 <tr>
-                  <td rowspan="2"><strong>Happy</strong></td>
+                  <td rowspan="2" style="text-align: center; vertical-align: middle;"><strong>Happy</strong></td>
                   <td>Male</td>
                   <td><audio controls src="assets/audio/jvnv/happy_m_prompt.wav"></audio></td>
                   <td><audio controls src="assets/audio/jvnv/happy_m_f5.wav"></audio></td>
@@ -631,7 +571,7 @@
                 </tr>
 
                 <tr>
-                  <td rowspan="2"><strong>Sad</strong></td>
+                  <td rowspan="2" style="text-align: center; vertical-align: middle;"><strong>Sad</strong></td>
                   <td>Male</td>
                   <td><audio controls src="assets/audio/jvnv/sad_m_prompt.wav"></audio></td>
                   <td><audio controls src="assets/audio/jvnv/sad_m_f5.wav"></audio></td>
@@ -647,7 +587,7 @@
                 </tr>
 
                 <tr>
-                  <td rowspan="2"><strong>Angry</strong></td>
+                  <td rowspan="2" style="text-align: center; vertical-align: middle;"><strong>Angry</strong></td>
                   <td>Male</td>
                   <td><audio controls src="assets/audio/jvnv/angry_m_prompt.wav"></audio></td>
                   <td><audio controls src="assets/audio/jvnv/angry_m_f5.wav"></audio></td>
@@ -663,7 +603,7 @@
                 </tr>
 
                 <tr>
-                  <td rowspan="2"><strong>Surprised</strong></td>
+                  <td rowspan="2" style="text-align: center; vertical-align: middle;"><strong>Surprised</strong></td>
                   <td>Male</td>
                   <td><audio controls src="assets/audio/jvnv/surprised_m_prompt.wav"></audio></td>
                   <td><audio controls src="assets/audio/jvnv/surprised_m_f5.wav"></audio></td>
@@ -679,7 +619,7 @@
                 </tr>
 
                 <tr>
-                  <td rowspan="2"><strong>Disgusted</strong></td>
+                  <td rowspan="2" style="text-align: center; vertical-align: middle;"><strong>Disgusted</strong></td>
                   <td>Male</td>
                   <td><audio controls src="assets/audio/jvnv/disgusted_m_prompt.wav"></audio></td>
                   <td><audio controls src="assets/audio/jvnv/disgusted_m_f5.wav"></audio></td>
@@ -695,7 +635,7 @@
                 </tr>
 
                 <tr>
-                  <td rowspan="2"><strong>Fearful</strong></td>
+                  <td rowspan="2" style="text-align: center; vertical-align: middle;"><strong>Fearful</strong></td>
                   <td>Male</td>
                   <td><audio controls src="assets/audio/jvnv/fearful_m_prompt.wav"></audio></td>
                   <td><audio controls src="assets/audio/jvnv/fearful_m_f5.wav"></audio></td>
@@ -718,52 +658,20 @@
 
     
 
-    <section id="paper">
-      <div class="container two-col-grid">
-        <article class="panel">
-          <h2>Paper</h2>
-          <p class="muted">
-            Title: <strong>Continuous Time-Varying Emotion Control Zero-Shot Text-To-Speech With Emotion Orthogonal LoRA</strong>
-          </p>
-          <p class="muted">
-            Replace the button below with your anonymous paper link, arXiv link, or supplementary material page.
-          </p>
-          <a class="btn btn-secondary" href="#">Add paper URL here</a>
-        </article>
-
-        <article class="panel">
-          <h2>Deployment notes</h2>
-          <ul>
-            <li>Host the audio files under a relative folder such as <span class="code">assets/audio/</span>.</li>
-            <li>Keep file names short and consistent with the sample labels.</li>
-            <li>For anonymous review, avoid names, institutions, personal domains, and identifiable analytics scripts.</li>
-            <li>You can publish this single HTML file on GitHub Pages or any static site host.</li>
-          </ul>
-        </article>
-      </div>
-    </section>
+    
 
     <section id="ethics">
       <div class="container">
         <div class="footer-card">
           <h2>Ethics statement</h2>
           <p class="muted">
-            This demo is intended for research presentation only. Speech synthesis systems with strong speaker similarity and emotional control may be misused for impersonation or deceptive content generation.
-            Any public release should include appropriate safeguards, consent procedures, and misuse mitigation measures.
+            This demo is intended for research presentation only. Speech synthesis systems with strong speaker similarity and emotional control may be misused for impersonation or deceptive content generation. Any public release should include appropriate safeguards, consent procedures, and misuse mitigation measures.
           </p>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container footer-card">
-      <strong>Notes</strong>
-      <p class="muted" style="margin: 10px 0 0;">
-        This page is a clean standalone replacement for the source template: branding, tracking scripts, cookie banners, external social widgets,
-        and organization-specific navigation were intentionally removed.
-      </p>
-    </div>
-  </footer>
+  
 </body>
 </html>
